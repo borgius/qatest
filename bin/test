@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+export SELENIUM_HOST=$(echo $DOCKER_HOST|awk -F '/|:' '{print $4}')
+
+docker run --rm -ti --name zalenium -p 4444:4444 -p 5555:5555 \
+    -e DOCKER_TLS_VERIFY -e DOCKER_HOST -e DOCKER_CERT_PATH -e DOCKER_MACHINE_NAME \
+    -v $DOCKER_CERT_PATH:$(echo $DOCKER_CERT_PATH) \
+    -v $CIRCLE_ARTIFACTS/videos:/home/seluser/videos \
+    --timeZone "America/Los_Angeles" \
+    --privileged dosel/zalenium start

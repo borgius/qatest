@@ -1,0 +1,38 @@
+language: node_js
+node_js:
+- '8'
+sudo: required
+dist: trusty
+env:
+  global:
+  matrix:
+  - HELPER=WebDriverIO
+services:
+  - docker
+before_install:
+  - docker pull selenium/standalone-chrome
+before_script:
+- docker run -d --net=host selenium/standalone-chrome
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- pwd
+- mkdir -p output
+- pwd
+- ls -l
+script:
+- ./node_modules/.bin/codeceptjs run --steps
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
+  local_dir: ./output
+  on:
+    branch: master
+
+notifications:
+  email:
+    recipients:
+      - carnivale2e@gmail.com
+    on_success: change # default: change
+    on_failure: always # default: always

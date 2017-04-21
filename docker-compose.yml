@@ -1,0 +1,16 @@
+version: '2'
+services:
+    codeceptjs:
+        image: soulmaneller/docker-codeceptjs-alpine-ready
+        command: supervisor -w testcases -x codeceptjs -n exit -- run --reporter mochawesome
+        environment:
+          - SELENIUM_HOST=chrome
+        links:
+            - chrome   # Set hostname of selenium this must match WebDriverIO hostname
+        volumes:
+            - ./:/codeceptjs
+
+    chrome:
+        image: selenium/standalone-chrome
+        logging:
+            driver: none
