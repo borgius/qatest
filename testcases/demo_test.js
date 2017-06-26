@@ -48,7 +48,7 @@ Scenario('Login and logout', (I, LoginPage, LogoutPage) => {
 	 
 	//login
 
-	LoginPage.login();
+	LoginPage.login('qwerty@gmail.com', 'qwerty123');
 
 	I.waitForElement('.account-ribbon-bar-text-desktop', 30);
 	I.seeInTitle('My Account');
