@@ -6,7 +6,6 @@
   "dependencies": {
     "codeceptjs": "^0.6.3",
     "faker": "^4.1.0",
-    "lodash": "^4.17.4",
     "mochawesome": "^2.2.1",
     "mochawesome-screenshots": "^1.5.2",
     "selenium-server": "^2.53.1",
