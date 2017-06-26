@@ -8,8 +8,6 @@ let data = {
  firstName: faker.name.firstName(),
  lastName: faker.name.lastName(),
  email : `a-${rand}@abc.com`, // NOTE returns `Bad Request` for registrations with `@mailinator.com`
- // email: 'arst@arstb.com',
- emailGetStarted : `b-${rand}@abc.com`,
 };
 
 /* Scenarios for "windowSize": "maximize" */
@@ -30,17 +28,8 @@ Scenario('User can create account', (I) => {
     I.fillField('Confirm',    data.pwd);
     I.click('Create My Account');
 
-    I.seeInCurrentUrl('/account/create');
-
-    // Wait for creating account and redirect
-    I.wait(10); // bad trick
-
-    I.seeInCurrentUrl('/search');
-    I.seeInCurrentUrl('e=ga1welcome');
-
-    // Wait for search results
-    I.wait(10); // bad trick
-
+    I.waitForElement('#page-content-wrapper', 30); // Wait for page
+    I.waitForElement('#suggested-filters-container', 10); // Wait for async loaded filters
     I.seeInTitle('Search | Results');
   }
 );
@@ -61,26 +50,12 @@ Scenario('User can Login', (I) => {
   }
 );
 
-// of course we also can use this func in prev test, but let leave it as is
-function LogIn(I) {
-  I.say('Login first');
-  I.amOnPage('https://testazure.carvana.com/account/login');
-
-    I.waitForText('Hey there, welcome back', 30);
-    within('#account-login-form', () => {
-      I.fillField('Email',    data.email);
-      I.fillField('Password', data.pwd);
-      I.click('Sign In');
-    })
-
-    I.seeInTitle('My Account');
-}
-
-Scenario('User can Logout', (I) => {
-    LogIn(I);
+Scenario('User can Logout', (I, LoginPage) => {
+    LoginPage.doLogin(data.email, data.pwd);
 
     I.amOnPage(data.page);
-    I.click('#account-dropdown-btn');
+    I.moveCursorTo('#account-dropdown-btn');
+    I.see('Sign Out', '#account-dropdown li a');
     I.click('Sign Out', '#account-dropdown li a');
 
     I.see('Sign In', 'a');
@@ -88,7 +63,7 @@ Scenario('User can Logout', (I) => {
 );
 
 Scenario('User can "Find My Car" for Volkswagen', (I) => {
-    // LogIn(I); // NOTE is that required?
+    // LoginPage.doLogin(data.email, data.pwd); // NOTE is that required?
 
     I.amOnPage(data.page);
     I.waitForElement('#text-search-input', 30);
@@ -98,12 +73,79 @@ Scenario('User can "Find My Car" for Volkswagen', (I) => {
 
     I.seeInCurrentUrl('/search');
     I.seeInCurrentUrl('SortBy=MostPopular');
-    I.seeInCurrentUrl('models=cpaGgxg7cZaxcBcTaHfj');
     I.seeInCurrentUrl('isHomepageSearch=true');
 
-    // Wait for search results
-    I.wait(10); // bad trick
+    I.waitForElement('#page-content-wrapper', 30); // Wait for page
 
     I.seeInTitle('Search | Results');
+
+    I.waitForElement('#page-content-wrapper .search-results-unsorted > result-tile .search-result-tile-year', 30);
+    I.see('VOLKSWAGEN', '#page-content-wrapper .search-results-unsorted > result-tile .search-result-tile-year');
+  }
+);
+
+Scenario('User can "Find My Car" for Honda Civic < $15000', function*(I) {
+    // LoginPage.doLogin(data.email, data.pwd); // NOTE is that required?
+
+    I.amOnPage(data.page);
+    I.waitForElement('#text-search-input', 30);
+    I.fillField('#text-search-input', 'Honda Civic');
+    I.see('Honda Civic', '.text-search-results.matching-results-container li.filter-result:nth-child(2) > span'); // assert that first element in section is `Honda Civic`
+    I.click('.text-search-results.matching-results-container li.filter-result:nth-child(2)'); // click on it
+
+    I.seeInCurrentUrl('/search');
+    I.seeInCurrentUrl('SortBy=MostPopular');
+    I.seeInCurrentUrl('isHomepageSearch=true');
+
+    I.waitForElement('#page-content-wrapper', 30); // Wait for page
+
+    I.seeInTitle('Search | Results');
+
+    I.waitForElement('#page-content-wrapper .search-results-unsorted > result-tile .search-result-tile-year', 30);
+    I.see('HONDA', '#page-content-wrapper .search-results-unsorted > result-tile .search-result-tile-year');
+    I.see('CIVIC', '#page-content-wrapper .search-results-unsorted > result-tile .search-result-tile-make-and-model');
+
+    // Mark slider pointer to be possible to locate it; Create div in desired position
+    I.executeScript(() => {
+      let labels = document.querySelectorAll('#sidebar-wrapper .refine-search-mobile-container .components .search-filter-range-label-header');
+      for (let i in labels) {
+        let label = labels[i];
+        if (label.innerText == 'PRICE') {
+          // Mark slider pointer to be possible to locate it
+          let priceSliderMaxPointer = label.nextElementSibling.querySelector('.rzslider .rz-pointer-max');
+          priceSliderMaxPointer.id = "price-slider-max-pointer";
+          // Create div in desired position
+          let desiredValue = 15000;
+          let slider = label.nextElementSibling.querySelector('.rzslider .rz-bar.rz-selection');
+          let sliderWidth = slider.offsetWidth; // 294
+          let minValue = parseInt(priceSliderMaxPointer.attributes['aria-valuemin'].value); // 10000
+          let maxValue = parseInt(priceSliderMaxPointer.attributes['aria-valuemax'].value); // 50000
+          let valueRange = maxValue - minValue;
+          desiredValue -= minValue;
+          let destPos = sliderWidth * desiredValue / valueRange; // 36.75
+
+          let destPosDiv = document.createElement('div');
+          destPosDiv.id = 'price-slider-dest-position';
+          slider.appendChild(destPosDiv);
+          destPosDiv.style.position = 'absolute';
+          destPosDiv.style.left = `${destPos}px`;
+          break;
+        }
+      }
+    })
+    // I.moveCursorTo('#price-slider-max-pointer');
+    I.dragAndDrop('#price-slider-max-pointer', '#price-slider-dest-position');
+    I.seeElement('#price-slider-max-pointer[aria-valuenow="15000"]'); // assert that value now is 15k
+
+    // Set sort by higest price
+    I.selectOption('.sort-container-desktop select', 'HIGHEST PRICE');
+
+    I.waitForElement('#page-content-wrapper .search-results-unsorted > result-tile .search-result-tile-price', 30);
+
+    let cost = yield I.grabTextFrom('#page-content-wrapper .search-results-unsorted > result-tile:first-child .search-result-tile-price');
+    cost = cost.replace('$', '').replace(',','');
+    if (cost > 15000) {
+      throw 'cost higer that 15k: ' + cost;
+    }
   }
 );
