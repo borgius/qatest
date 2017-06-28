@@ -21,7 +21,9 @@ exports.config = {
     "timeout": 120000,
     "output": "./output",
     "include": {
-        "I": "./steps_file.js"
+        "I": "./steps_file.js",
+        "LoginPage": "./pages/login_page.js",
+        "LogoutPage": "./pages/logout_page.js"
     },
     "multiple": {
         "basic": {
