@@ -71,3 +71,33 @@ Scenario('Find My Car', (I) => {
 	I.seeInTitle('Search | Results');
 
 });
+
+/*---------Find My Car for Honda Civic < $15000----------*/
+
+Scenario('Find My Car for Honda Civic < $15000', (I) => {
+
+	I.amOnPage(data.page);
+	I.waitForElement('#text-search-input', 30);
+	I.fillField('#text-search-input', "Honda Civic");
+	I.click('.filter-result');
+	I.waitForElement('#text-search-input', 30);
+	I.seeInTitle('Search | Results');
+	I.executeScript(() => {
+
+		let elem = document.createElement('div');
+
+		elem.style.display = 'block';
+		elem.style.position = 'absolute';
+		elem.style.left = '36.75px';
+
+		let cildElem = document.getElementsByClassName('rz-selection')[0];
+
+		cildElem.appendChild(elem);
+
+		elem.setAttribute('id', 'newElemPos');
+
+	});
+	I.waitForElement('#newElemPos', 30);
+	I.dragAndDrop('.rz-pointer-max', '#newElemPos');
+	I.seeElement('.rz-pointer-max[aria-valuenow="15000"]');
+});
