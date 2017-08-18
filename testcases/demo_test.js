@@ -13,25 +13,32 @@ Factory.define('user')
 
 var data = Factory.build('user');
 
-/* Scenarios for "windowSize": "maximize" */
+let findCar = (I, car) => {
+	I.waitForElement('.text-search-input-buffer', timeout);
+	within('.text-search-input-buffer', () => {
+	  	I.fillField('#text-search-input', car);
+	  	I.waitForElement('.filter-result:nth-child(2)', timeout);
+	  	I.click('.filter-result:nth-child(2)');
+	})
+}
+
 Feature('Demo');
 
-
 Scenario('Create Account + Logout + Login', (I) => {
-
+	
  	//  Create Account 
 
     I.amOnPage(data.page);
- 	I.waitForText('Create Account', timeout, '.link-text');
+    I.waitForText('Create Account', timeout, '.link-text');
  	I.click('.link-text');
-	I.waitForElement('#account-create-form', timeout);
+ 	I.waitForElement('#account-create-form', timeout);
 	within('#account-create-form', () => {
-	   	I.fillField('#FirstName', data.firstName);
-	    I.fillField('#LastName', data.lastName);
-		I.fillField('#Email', data.email);
-		I.fillField('#DeliveryZip', data.zip);
-	    I.fillField('#Password', data.pwd);
-	    I.fillField('#ConfirmPassword', data.pwd);
+	   	I.fillField('FirstName', data.firstName);
+	    I.fillField('LastName', data.lastName);
+		I.fillField('Email', data.email);
+		I.fillField('DeliveryZip', data.zip);
+	    I.fillField('Password', data.pwd);
+	    I.fillField('ConfirmPassword', data.pwd);
 	    I.click('#createAccountSubmitButton');
 	  });
 	 I.waitForText(`${data.firstName}'s Account`, timeout, '.account-dropdown-txt');
@@ -62,12 +69,7 @@ Scenario('Find Volkswagen', (I) => {
 	//'Find My Car' for Volkswagen
 	
 	I.amOnPage(data.page);
-	I.waitForElement('.text-search-input-buffer',timeout);
-  	within('.text-search-input-buffer', () => {
-  		I.fillField('#text-search-input', 'Volkswagen');
-  		I.waitForText('Volkswagen', timeout, '.text-search-results');
-  		I.click("//span[contains(text(), 'Volkswagen')]");
-	});
+	findCar(I, 'Volkswagen');
 	I.waitForText('VOLKSWAGEN', timeout, '.tag');
 	}
 );
@@ -77,12 +79,7 @@ Scenario('Find Honda Civic < $15000', (I) => {
 	//'Find My Car' for Honda Civic
 
 	I.amOnPage(data.page);
-	I.waitForElement('.text-search-input-buffer',timeout);
-  	within('.text-search-input-buffer', () => {
-  		I.fillField('#text-search-input', 'Honda Civic');
-  		I.waitForText('Honda Civic', timeout, '.text-search-results');
-  		I.click("//span[contains(text(), 'Honda Civic')]");
-	});
+	findCar(I, 'Honda Civic');
 	I.waitForText('$50,000', timeout, '.range-max-value');
 	I.waitForElement('.rz-bar.rz-selection', timeout);
 
@@ -96,7 +93,9 @@ Scenario('Find Honda Civic < $15000', (I) => {
 		elem1.setAttribute("style", "display:block; position: absolute; left: 36.75px;");
 	});
 	I.dragAndDrop('.rz-pointer.rz-pointer-max', '#elem-goto');
-
+	I.waitForText('HONDA CIVIC', timeout, '.tag-container');
+	I.waitForText('$1000 - $15000', timeout, '.tag-container');
+	
 	//User can select a vehicle from results
 
 	I.waitForElement(".search-result-tile-image-container", timeout);
