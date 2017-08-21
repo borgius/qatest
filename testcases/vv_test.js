@@ -1,4 +1,5 @@
 const timeout = 40;
+Feature('Search');
 Scenario('Find Volkswagen', (I) => {
  
  	//'Find My Car' for Volkswagen
@@ -10,3 +11,5 @@ Scenario('Find Volkswagen', (I) => {
  	I.click('#text-search-input');
  	I.fillField('#text-search-input', 'Volkswagen');
  	I.pressKey('Enter');
+ 	}
+);

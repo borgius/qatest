@@ -14,5 +14,6 @@ Scenario('Log out', (I) => {
  	I.moveCursorTo('#account-dropdown-btn');
  	I.waitForText('Sign Out', timeout);
  	I.click('Sign Out');
-  }
+ 	}
 );
+
