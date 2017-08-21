@@ -1,3 +1,4 @@
+const timeout = 40
 Feature('Create');
 
 Scenario('User can create account', (I) => {
@@ -9,6 +10,6 @@ Scenario('User can create account', (I) => {
  	I.fillField('DeliveryZip', '14215');
  	I.fillField('Password', 'qwerty12345');
  	I.fillField('ConfirmPassword', 'qwerty12345');
- 	I.click('Create My Account', '#createAccountSubmitButton');
+ 	I.click('Create My Account', '#createAccountSubmitButton' , timeout);
   }
 );
