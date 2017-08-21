@@ -18,7 +18,7 @@ let findCar = (I, car) => {
 	within('.text-search-input-buffer', () => {
 	  	I.fillField('#text-search-input', car);
 	  	I.waitForText(car, timeout, '.filter-result:nth-child(2)');
-	  	I.click(car,'.filter-result:nth-child(2)');
+	  	I.click('.filter-result:nth-child(2)');
 	  	})
   	I.waitForText(car.toUpperCase(), timeout, '.tag');
 }
