@@ -1,4 +1,4 @@
-const timeout = 40
+const timeout = 40;
 Feature('Create');
 
 Scenario('User can create account', (I) => {

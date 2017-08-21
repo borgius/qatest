@@ -1,4 +1,4 @@
-const timeout = 40
+const timeout = 40;
 Scenario('Find Volkswagen', (I) => {
  
  	//'Find My Car' for Volkswagen

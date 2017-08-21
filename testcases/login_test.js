@@ -1,4 +1,4 @@
-const timeout = 40
+const timeout = 40;
 Feature('Login');
 
 Scenario('User can login', (I) => {
