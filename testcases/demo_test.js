@@ -17,20 +17,21 @@ let findCar = (I, car) => {
 	I.waitForElement('.text-search-input-buffer', timeout);
 	within('.text-search-input-buffer', () => {
 	  	I.fillField('#text-search-input', car);
-	  	I.waitForElement('.filter-result:nth-child(2)', timeout);
-	  	I.click('.filter-result:nth-child(2)');
-	})
+	  	I.waitForText(car, timeout, '.filter-result:nth-child(2)');
+	  	I.click(car,'.filter-result:nth-child(2)');
+	  	})
+  	I.waitForText(car.toUpperCase(), timeout, '.tag');
 }
 
 Feature('Demo');
 
 Scenario('Create Account + Logout + Login', (I) => {
-	
+
  	//  Create Account 
 
     I.amOnPage(data.page);
     I.waitForText('Create Account', timeout, '.link-text');
- 	I.click('.link-text');
+ 	I.click('Create Account', '.link-text');
  	I.waitForElement('#account-create-form', timeout);
 	within('#account-create-form', () => {
 	   	I.fillField('FirstName', data.firstName);
@@ -70,7 +71,6 @@ Scenario('Find Volkswagen', (I) => {
 	
 	I.amOnPage(data.page);
 	findCar(I, 'Volkswagen');
-	I.waitForText('VOLKSWAGEN', timeout, '.tag');
 	}
 );
 
@@ -93,8 +93,7 @@ Scenario('Find Honda Civic < $15000', (I) => {
 		elem1.setAttribute("style", "display:block; position: absolute; left: 36.75px;");
 	});
 	I.dragAndDrop('.rz-pointer.rz-pointer-max', '#elem-goto');
-	I.waitForText('HONDA CIVIC', timeout, '.tag-container');
-	I.waitForText('$1000 - $15000', timeout, '.tag-container');
+	I.waitForText('$1000 - $15000', timeout, '.tag');
 	
 	//User can select a vehicle from results
 
