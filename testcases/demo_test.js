@@ -35,12 +35,10 @@ var email =    GenerateName() + "@gmail.com";
 var password = lastName + "1";
 /* Scenarios for "windowSize": "maximize" */
 Feature('Demo');
-
 Scenario('User can create account', (I) => {
-    /*I.amOnPage(data.page);
-    I.waitForText('Create Account', 80);*/
-
-    /*User can create account*/
+  
+    /*create account*/
+    
     I.amOnPage('https://goo.gl/6rj684');
     I.waitForElement('.build-a-garage', 30);
     I.click('.build-a-garage', /*'Create Account'*/);
@@ -56,7 +54,9 @@ Scenario('User can create account', (I) => {
     I.fillField('#ConfirmPassword', lastName + '1');
     I.waitForElement('#createAccountSubmitButton');
     I.click('#createAccountSubmitButton');
+    
     /*User can login*/
+    
     I.amOnPage('https://testazure.carvana.com');
     I.click('Sign In', '.my-account');
     I.waitForElement('#EmailAddress', 10);
@@ -64,14 +64,18 @@ Scenario('User can create account', (I) => {
     I.waitForElement('#Password', 10);
     I.fillField('#Password', password);
     I.pressKey('Enter');
+   
     /*User can fined VOLKSWAGEN*/
+    
     I.amOnPage('https://testazure.carvana.com');
     I.waitForElement('#text-search-input', 20);
     I.fillField('#text-search-input', 'Volkswagen');
     I.click('.filter-result');
     I.waitForElement('.search-content-container', 20)
-    I.wait(10);
+    I.wait(5);
+    
     /*User can logout*/
+    
     I.moveCursorTo('#account-dropdown-btn');
     I.waitForText('Sign Out', 20);
     I.click('Sign Out');
