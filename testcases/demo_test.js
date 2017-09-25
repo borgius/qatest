@@ -22,7 +22,7 @@ Scenario('User can create account', (I) => {
 	I.fillField('Password', data.pwd);
 	I.fillField('ConfirmPassword', data.pwd);
 	I.fillField('LastName', data.lastName);
-	I.fillField('LastName', data.email);
+	I.fillField('Email', data.email);
 	I.click('Sign In' , timeout);
   }
 );
