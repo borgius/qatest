@@ -32,5 +32,5 @@ Scenario('User can Login / Logout',(I) =>{
 	I.click('Create Account','#nav-upper');
 	I.fillField('Email', data.email);
 	I.fillField('Password', data.pwd);
-	I.click('Sing in','.login-button-container');
+	I.click('Sing in','.button');
 });
