@@ -32,5 +32,5 @@ Scenario('User can Login / Logout',(I) =>{
 	I.click('Sign In' , '#nav-upper');
 	I.fillField('EmailAddress', data.email);
 	I.fillField('Password', data.pwd);
-	I.click('Sign in');
+	I.click('Sign In');
 });
