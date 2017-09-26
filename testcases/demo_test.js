@@ -29,8 +29,8 @@ Scenario('User can create account', (I) => {
 
 Scenario('User can Login / Logout',(I) =>{
 	I.amOnPage(data.page);
-	I.click('Create Account','#nav-upper');
-	I.fillField('#EmailAddress', data.email);
+	I.click('Sign in','#nav-upper');
+	I.fillField('EmailAddress', data.email);
 	I.fillField('Password', data.pwd);
 	I.click('Sign in');
 });
