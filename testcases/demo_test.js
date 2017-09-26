@@ -17,6 +17,7 @@ Feature('Demo');
 
 Scenario('User can create account', (I) => {
 	I.amOnPage(data.page);
+	I.see('Create Account');
 	I.click('Create Account');
 	I.fillField('FirstName', data.firstName);
 	I.fillField('Password', data.pwd);
