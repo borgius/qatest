@@ -35,3 +35,11 @@ Scenario('User can Login / Logout',(I) =>{
 	I.click('Sign In');
 	I.amOnPage("/account/logout");
 });
+
+Scenario('User can "Find My Car" for Volkswagen',(I) =>{
+	I.amOnPage(data.page);
+	I.amOnPage("/search");
+	I.click("MAKE AND MODEL");
+	I.click("Volkswagen");
+	I.click("Beetle");
+});
