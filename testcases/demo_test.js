@@ -16,7 +16,30 @@ let data = {
 Feature('Demo');
 
 Scenario('User can create account', (I) => {
-    I.amOnPage(data.page);
-    I.waitForText('Create Account', 80);
+	I.amOnPage(data.page);
+	I.click('Create Account','#nav-upper');
+	I.fillField('FirstName', data.firstName);
+	I.fillField('Password', data.pwd);
+	I.fillField('ConfirmPassword', data.pwd);
+	I.fillField('LastName', data.lastName);
+	I.fillField('Email', data.email);
+	I.click('Create My Account' ,'#createAccountSubmitButton' );
   }
 );
+
+Scenario('User can Login / Logout',(I) =>{
+	I.amOnPage(data.page);
+	I.click('Sign In' , '#nav-upper');
+	I.fillField('EmailAddress', data.email);
+	I.fillField('Password', data.pwd);
+	I.click('Sign In');
+	I.amOnPage("/account/logout");
+});
+
+Scenario('User can "Find My Car" for Volkswagen',(I) =>{
+	I.amOnPage(data.page);
+	I.amOnPage("/search");
+	//I.click("MAKE AND MODEL","#sidebar-wrapper");
+	//I.click("Volkswagen");
+	//I.click("Beetle");
+});
