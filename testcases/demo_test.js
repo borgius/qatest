@@ -27,7 +27,7 @@ Scenario('User can create account', (I) => {
   }
 );
 
-Scenarion('User can Login / Logout'{
+Scenarion('User can Login / Logout',{
 	I.amOnPage(data.page);
 	I.click('Create Account','#nav-upper');
 	I.fillField('Email', data.email);
