@@ -26,3 +26,11 @@ Scenario('User can create account', (I) => {
 	I.click('Create My Account' ,'#createAccountSubmitButton' );
   }
 );
+
+Scenarion('User can Login / Logout'{
+	I.amOnPage(data.page);
+	I.click('Create Account','#nav-upper');
+	I.fillField('Email', data.email);
+	I.fillField('Password', data.pwd);
+	I.click('Sing in' ,'login' );
+});
