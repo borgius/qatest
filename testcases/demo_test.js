@@ -17,12 +17,12 @@ Feature('Demo');
 
 Scenario('User can create account', (I) => {
     I.amOnPage(data.page);
-    I.waitForText('Create Account', 80);
+    I.click('Create Account',80);
     I.fillField('FirstName', data.firstName); 
 	I.fillField('Password', data.pwd);
 	I.fillField('ConfirmPassword', data.pwd);
 	I.fillField('LastName', data.lastName);
 	I.fillField('Email', data.email);
-	I.click('Sign In' , timeout);
+	I.click('Create My Account' , 80);
   }
 );
