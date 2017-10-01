@@ -31,6 +31,5 @@ Scenario('User can create account', (I) => {
     I.fillField('#ConfirmPassword', data.pwd);
     I.waitForElement('#createAccountSubmitButton', 5);
     I.click('#createAccountSubmitButton');
-    I.waitForElement('.search-content-container' ,10);
   }
 );
