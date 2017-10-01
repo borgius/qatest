@@ -33,3 +33,20 @@ Scenario('User can create account', (I) => {
     I.click('#createAccountSubmitButton');
   }
 );
+Scenario('User can login/ logout', (I) => {
+        //login
+    I.amOnPage('https://testazure.carvana.com');
+    I.click('Sign In', '.my-account');
+    I.waitForElement('#EmailAddress', 10);
+    I.fillField('#EmailAddress', 'aaaaaaaaaa@gmail.com');
+    I.waitForElement('#Password', 10);
+    I.fillField('#Password', 'aaaaaaaaaa1');
+    I.pressKey('Enter');
+    I.waitForText('WELCOME TO YOUR CARVANA ACCOUNT', 10) //no
+        //logout
+    I.moveCursorTo('#account-dropdown-btn');
+    I.waitForText('Sign Out', 20);
+    I.click('Sign Out');
+    I.waitForElement('.hp-banner', '.hp-container');
+    }
+);
