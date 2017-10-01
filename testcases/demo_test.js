@@ -47,6 +47,6 @@ Scenario('User can login/ logout', (I) => {
     I.moveCursorTo('#account-dropdown-btn');
     I.waitForText('Sign Out', 20);
     I.click('Sign Out');
-    I.waitForElement('.hp-banner', '.hp-container');
+    I.waitForText('TO BUY A CAR', 10);
     }
 );
