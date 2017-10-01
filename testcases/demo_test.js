@@ -50,3 +50,11 @@ Scenario('User can login/ logout', (I) => {
     I.waitForText('TO BUY A CAR', 10);
     }
 );
+Scenario('User can fined VOLKSWAGEN', (I) => {
+        I.amOnPage(data.page);
+        I.waitForElement('#text-search-input', 20);
+        I.fillField('#text-search-input', 'Volkswagen');
+        I.click('.filter-result');
+        I.waitForElement('.search-content-container', 20)
+    }
+)
