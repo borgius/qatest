@@ -58,3 +58,22 @@ Scenario('User can fined VOLKSWAGEN', (I) => {
         I.waitForElement('.search-content-container', 20)
     }
 )
+ Scenario('User can fined HONDA CIVIC <15k', (I) => {
+        I.amOnPage(data.page);
+        I.waitForText('TO BUY A CAR', 10);
+        I.waitForElement('#text-search-input', 20);
+        I.fillField('#text-search-input', 'Honda Civic');
+        I.click('.filter-result');
+        I.waitForElement('.search-content-container', 20); // мы узнаем что результаты появились на страничке
+        I.waitForText('Honda Civic', 5); // мы точно будем знать что нам нашло именно Honda Civic
+        //функция передвигаюшия слайдер
+    I.executeScript(function() {
+                let SpanP = document.querySelector(".rzslider .rz-bar.rz-selection");
+                let element = document.createElement('div');
+                SpanP.insertBefore(elem, null);
+        		element.setAttribute("id","elem-goto");
+        		element.setAttribute("style", "display:block; position: absolute; left: 36.75px;");
+        });
+    	I.dragAndDrop('.rz-pointer.rz-pointer-max', '#elem-goto');
+    	I.waitForText('$1000 - $15000', timeout, '.tag');
+    }
