@@ -68,11 +68,11 @@ Scenario('User can fined VOLKSWAGEN', (I) => {
         I.waitForText('Honda Civic', 5); // мы точно будем знать что нам нашло именно Honda Civic
         //функция передвигаюшия слайдер
     I.executeScript(function() {
-                let SpanP = document.querySelector(".rzslider .rz-bar.rz-selection");
-                let element = document.createElement('div');
-                SpanP.insertBefore(elem, null);
-        		element.setAttribute("id","elem-goto");
-        		element.setAttribute("style", "display:block; position: absolute; left: 36.75px;");
+                let SpanP = document.querySelector(".rzslider .rz-bar .rz-selection");
+                let element = document.createElement("div");
+                SpanP.appendChild(elem);
+        		elem.setAttribute("id","elem-goto");
+        		elem.setAttribute("style", "display:block; position: absolute; left: 36.75px;");
         });
     	I.dragAndDrop('.rz-pointer.rz-pointer-max', '#elem-goto');
     	I.waitForText('$1000 - $15000', timeout, '.tag');
