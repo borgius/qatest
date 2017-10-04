@@ -40,7 +40,7 @@ Scenario('User can create account', (I) => {
 });
     I.pressKey('Enter');
             //logout
-        I.moveCursorTo('#account-dropdown-txt');
+        I.moveCursorTo('account-dropdown-btn');
     I.waitForText('Sign Out', 20);
     I.click('Sign Out');
     }
