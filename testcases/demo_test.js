@@ -34,10 +34,10 @@ Scenario('User can create account', (I) => {
             //login
         I.amOnPage('https://testazure.carvana.com');
     I.click('Sign In', '.my-account');
-    I.waitForElement('#Email', 20);
-    I.fillField('#Email', email);
-    I.waitForElement('#Password', 20);
-    I.fillField('#Password', password);
+    within('#account-login-form', () => {
+    I.fillField('Email', data.email);
+    I.fillField('Password', data.pwd);
+});
     I.pressKey('Enter');
             //logout
         I.moveCursorTo('#account-dropdown-btn');
