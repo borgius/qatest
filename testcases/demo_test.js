@@ -30,7 +30,7 @@ Scenario('User can create account', (I) => {
         I.click('#createAccountSubmitButton');
   }
 );
-    Scenario('User can login/ logout', (I, steps_file) => {
+    Scenario('User can login/ logout', (I) => {
             //login
         I.amOnPage('https://testazure.carvana.com');
     I.click('Sign In', '.my-account');
@@ -59,7 +59,7 @@ Scenario('User can create account', (I) => {
     I.waitForText('TO BUY A CAR', 10);
     I.waitForElement('#text-search-input', 20);
     I.fillField('#text-search-input', 'Honda Civic');
-    I.click('.filter-result', 'Honda Civic');
+    I.click('.filter-result');
     I.waitForElement('.search-content-container', 20); // мы узнаем что результаты появились на страничке
     I.waitForText('Honda Civic', 20); // мы точно будем знать что нам нашло именно Honda Civic
     //функция передвигаюшия слайдер
