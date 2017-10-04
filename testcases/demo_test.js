@@ -40,8 +40,8 @@ Scenario('User can create account', (I) => {
 });
     I.pressKey('Enter');
             //logout
-        I.waitForText(data.email, 40 , '.account-item');
-        I.waitForText(`${data.firstName}'s Account`, c.timeout, '#account-dropdown-wrapper');
+        I.waitForText(data.email, 40 , '.parent-item');
+        I.waitForText(`${data.firstName}'s Account`, 40, '#account-dropdown-wrapper');
         I.click('#account-dropdown-wrapper');
         I.waitForText('Sign Out', 40 , '#account-dropdown');
         I.click('Sign Out', '#account-dropdown');
@@ -51,8 +51,7 @@ Scenario('User can create account', (I) => {
     Scenario('User can fined VOLKSWAGEN', (I) => {
         I.amOnPage(data.page);
         I.waitForElement('#text-search-input', 20);
-        I.fillField('#text-search-input', 'Volkswagen');
-        I.click('.filter-result');
+        I.fillField('#text-search-input', 'Volkswagen');        I.click('.filter-result');
         I.waitForElement('.search-content-container', 20)
     }
 );
