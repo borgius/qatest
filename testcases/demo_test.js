@@ -34,9 +34,9 @@ Scenario('User can create account', (I) => {
             //login
         I.amOnPage('https://testazure.carvana.com');
     I.click('Sign In', '.my-account');
-    I.waitForElement('#EmailAddress', 10);
+    I.waitForElement('#EmailAddress', 20);
     I.fillField('#EmailAddress', email);
-    I.waitForElement('#Password', 10);
+    I.waitForElement('#Password', 20);
     I.fillField('#Password', password);
     I.pressKey('Enter');
             //logout
