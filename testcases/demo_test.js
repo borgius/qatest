@@ -40,12 +40,9 @@ Scenario('User can create account', (I) => {
 });
     I.pressKey('Enter');
             //logout
-        I.waitForText(data.email, 40 , '.parent-item');
-        I.waitForText(`${data.firstName}'s Account`, 40, '#account-dropdown-wrapper');
-        I.click('#account-dropdown-wrapper');
-        I.waitForText('Sign Out', 40 , '#account-dropdown');
-        I.click('Sign Out', '#account-dropdown');
-        I.waitForText('Sign In', 40 , '.my-account');
+        I.moveCursorTo('#account-dropdown-txt');
+    I.waitForText('Sign Out', 20);
+    I.click('Sign Out');
     }
 );
     Scenario('User can fined VOLKSWAGEN', (I) => {
