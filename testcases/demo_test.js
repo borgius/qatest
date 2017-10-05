@@ -40,9 +40,11 @@ Scenario('User can create account', (I) => {
 });
     I.pressKey('Enter');
             //logout
-        I.moveCursorTo('account-dropdown-btn');
-    I.waitForText('Sign Out', 20);
-    I.click('Sign Out');
+       I.waitForText(data.email + 'Account');
+        I.moveCursorTo(data.email + 'Account');
+        I.waitForText('Sign Out', 20);
+        I.click('Sign Out');
+        I.seeInCurentUrl('https://testazure.carvana.com');
     }
 );
     Scenario('User can fined VOLKSWAGEN', (I) => {
