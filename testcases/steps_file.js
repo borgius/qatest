@@ -30,6 +30,6 @@ logout(){
     within('#account-dropdown-btn', () => {
         I.moveCursorTo('.carvana-blue.account-dropdown-txt);
     I.waitForText('Sign out', 20);
-    I.click('Sign out");
+    I.click('Sign out');
 });
 }
