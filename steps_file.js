@@ -28,4 +28,3 @@ logout(){
         I.click(Sign out);
     });
 }
-
