@@ -16,7 +16,7 @@ module.exports = {
     _init() {
         I = actor();
     },
-    login()
+    login(){
         I.amOnPage('https://testazure.carvana.com');
         I.click('Sign In', '.my-account');
         I.waitForElement('#EmailAddress', 10);
@@ -25,14 +25,11 @@ module.exports = {
         I.fillField('#Password', data.pwd);
         I.click('.button.primary-btn');
     }
-}
+
 logout(){
     within('#account-dropdown-btn', () => {
         I.moveCursorTo('.carvana-blue.account-dropdown-txt);
     I.waitForText('Sign out', 20);
-    I.click(Sign out);
+    I.click('Sign out");
 });
 }
-}
-
-
