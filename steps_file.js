@@ -1,12 +1,31 @@
+'use strict'
 
-'use strict';
-// in this file you can append custom step methods to 'I' object
-
-module.exports = function() {
-  return actor({
-
-    // Define custom steps here, use 'this' to access default methods of I.
-    // It is recommended to place a general 'login' function here.
-
-  });
+let I;
+module.exports = {
+    _init() {
+        I = actor();
+    },
+    login(){
+        I.amOnPage('https://testazure.carvana.com');
+        I.click('Sign In', '.my-account');
+        I.waitForElement('#EmailAddress', 10);
+        I.fillField('#EmailAddress', data.email);
+        I.waitForElement('#Password', 10);
+        I.fillField('#Password', data.pwd);
+        I.click('.button.primary-btn');
+    }
 }
+logout(){
+    I.moveCursorTo('#account-dropdown-btn');
+    I.waitForText('Sign Out', 20);
+    I.click('Sign Out');
+    I.seeInCurentUrl('https://testazure.carvana.com');
+}
+logout(){
+    within('#account-dropdown-btn', () => {
+        I.moveCursorTo('.carvana-blue.account-dropdown-txt);
+        I.waitForText('Sign out', 20);
+        I.click(Sign out);
+    });
+}
+
