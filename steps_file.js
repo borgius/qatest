@@ -14,17 +14,11 @@ module.exports = {
         I.fillField('#Password', data.pwd);
         I.click('.button.primary-btn');
     }
-}
-logout(){
-    I.moveCursorTo('#account-dropdown-btn');
-    I.waitForText('Sign Out', 20);
-    I.click('Sign Out');
-    I.seeInCurentUrl('https://testazure.carvana.com');
-}
 logout(){
     within('#account-dropdown-btn', () => {
         I.moveCursorTo('.carvana-blue', '.account-dropdown-txt');
         I.waitForText('Sign out', 20);
         I.click('Sign out');
     });
+    }
 }
