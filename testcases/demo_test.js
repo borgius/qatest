@@ -30,9 +30,7 @@ I.waitForElement('#createAccountSubmitButton', 5);
 I.click('#createAccountSubmitButton');
 });
 Scenario('User can login/ logout', (I, steps_file) => {
-    //login
     I.login();
-    //logout
     I.logout();
 });
 Scenario('User can fined VOLKSWAGEN', (I) => {
