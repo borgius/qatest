@@ -13,7 +13,7 @@ module.exports = {
         I.waitForElement('#Password', 10);
         I.fillField('#Password', data.pwd);
         I.click('.button.primary-btn');
-    }
+    },
 logout(){
     within('#account-dropdown-btn', () => {
         I.moveCursorTo('.carvana-blue', '.account-dropdown-txt');
