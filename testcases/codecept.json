@@ -1,0 +1,27 @@
+{
+  "output": "./output",
+  "helpers": {
+    "WebDriverIO": {
+      "url": "http://localhost",
+      "browser": "chrome"
+    },
+    "SeleniumWebdriver": {
+      "url": "http://localhost",
+      "browser": "chrome"
+    }
+  },
+  "include": {
+    "I": "./steps_file.js",
+    "SearchPage": "./pages/SearchPage.js",
+    "LoginPage": "./pages/LoginPage.js",
+    "CreateAccountPage": "./pages/CreateAccountPage.js",
+    "AccountPage": "./pages/AccountPage.js"
+  },
+  "mocha": {},
+  "bootstrap": false,
+  "teardown": null,
+  "hooks": [],
+  "tests": "./*_test.js",
+  "timeout": 10000,
+  "name": "tests"
+}

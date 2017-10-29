@@ -1,13 +1,9 @@
 Feature('Find My Car');
 
-Scenario('Find Volkswagen', (I) => {
+Scenario('Find Volkswagen', (I, SearchPage) => {
 
-	I.amOnPage('https://testazure.carvana.com/');
-	I.click ('Find My Car');
-	I.wait(10);
-	I.fillField({xpath:'//*[@id="text-search-input"]'},'Volkswagen');
-  I.pressKey('Enter');
-	I.wait(3);
-	I.see('VOLKSWAGEN');
+	SearchPage.openURL();
+	SearchPage.search('Volkswagen');
+	SearchPage.seeTag('VOLKSWAGEN');
 
 });
